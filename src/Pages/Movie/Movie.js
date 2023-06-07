@@ -11,7 +11,6 @@ const Movie = () => {
     const movie = useLoaderData();
     const [validated, setValidated] = useState(false);
     const [userDetails, setUserDetails] = useState(null);
-    console.log(userDetails);
 
     useEffect(() => {
         const storedUserDetails = localStorage.getItem('userDetails');
@@ -29,6 +28,7 @@ const Movie = () => {
 
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         const form = event.target;
         const firstName = form.firstName.value;
         const lastName = form.lastName.value;
@@ -36,13 +36,7 @@ const Movie = () => {
         const person = form.person.value;
         const state = form.state.value;
         const price = form.state.value;
-        setUserDetails(firstName, lastName, movieName, person, state, price);
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        setValidated(true);
-
+        console.log(firstName, lastName, movieName, person, state, price);
     };
 
     return (
@@ -112,7 +106,7 @@ const Movie = () => {
                     feedbackType="invalid"
                 />
             </Form.Group>
-            <Button className='btn-details' type="submit">Book Now</Button>
+            <Button className='btn-details' type="submit">Book Ticket</Button>
         </Form>
     );
 };
