@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import '../Home/AllMovie/AllMovie.css'
 
 const Movie = () => {
     const movie = useLoaderData();
     const [validated, setValidated] = useState(false);
+    const [userDetails, setUserDetails] = useState(null);
+    console.log(userDetails);
+
+    useEffect(() => {
+        const storedUserDetails = localStorage.getItem('userDetails');
+        if (storedUserDetails) {
+            setUserDetails(JSON.parse(storedUserDetails));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (userDetails) {
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+        }
+    }, [userDetails]);
+
+
 
     const handleSubmit = (event) => {
         const form = event.target;
@@ -19,19 +36,18 @@ const Movie = () => {
         const person = form.person.value;
         const state = form.state.value;
         const price = form.state.value;
-        console.log(firstName, lastName, movieName, person, state, price);
-
+        setUserDetails(firstName, lastName, movieName, person, state, price);
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
-
         setValidated(true);
+
     };
 
     return (
-        <Form noValidate validated={validated} onSubmit={handleSubmit} className='mt-5'>
-            <h1>Register for {movie.name} Movie Ticket</h1>
+        <Form noValidate validated={validated} onSubmit={handleSubmit} className='mt-5 t'>
+            <h1 className='fw-bold mb-4'>Book {movie.name} Movie Tickets</h1>
             <Row className="mb-3">
                 <Form.Group as={Col} md="4" controlId="validationCustom01">
                     <Form.Label>First name</Form.Label>
@@ -96,7 +112,7 @@ const Movie = () => {
                     feedbackType="invalid"
                 />
             </Form.Group>
-            <Button type="submit">Submit form</Button>
+            <Button className='btn-details' type="submit">Book Now</Button>
         </Form>
     );
 };

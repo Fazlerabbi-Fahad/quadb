@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AllMovie from './AllMovie';
 import MovieModal from '../MovieModal/MovieModal';
+import './AllMovie.css';
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
@@ -15,7 +16,7 @@ const AllMovies = () => {
     }, [])
     return (
         <div className='mt-5'>
-            <div className='row g-2'>
+            <div className='row'>
                 {
                     movies.map(movie => <AllMovie
                         setShow={setShow}

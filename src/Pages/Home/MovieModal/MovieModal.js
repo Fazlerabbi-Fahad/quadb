@@ -1,9 +1,10 @@
-import React, { createElement } from 'react';
-import { Button, Card, Modal } from 'react-bootstrap';
+import React from 'react';
+import { Card, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../AllMovie/AllMovie.css'
 
 const MovieModal = ({ details, show, setShow }) => {
-
+    const summary = `${details.summary}`;
     return (
         <div>
             <Modal
@@ -13,27 +14,23 @@ const MovieModal = ({ details, show, setShow }) => {
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
+                    <Modal.Title id="example-custom-modal-styling-title fw-bold">
                         {details.name}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
-                    {/* <Card.Img className='img-height'
-                        variant="top" src={details?.image.original} /> */}
                     <Card.Body>
-                        <p>Summary: <span>{details.summary}</span></p>
-                        <p>Language: <span>{details.language}</span></p>
-                        {/* <p>Genres: <span>{details.genres[1] ? details.genres[1] : details.genres[0]}</span></p> */}
-                        <p>Status: <span>{details.status}</span></p>
-                        {/* <p>Ratings: <span>{details.rating.average ? details.rating.average : 'Not Rated'}</span></p> */}
+                        <p><span className='fw-bold'>Summary: </span><span dangerouslySetInnerHTML={{ __html: summary }}></span></p>
+                        <p><span className='fw-bold'>Language:</span> <span>{details.language}</span></p>
+                        <p><span className='fw-bold'>Status:  </span><span>{details.status}</span></p>
 
-
-                        <Link className='btn btn-primary' to={`/movie/${details.id}`}></Link>
+                        <Link className='btn btn-details text-decoration-none text-white p-10' variant="primary" to={`/movie/${details.id}`}>
+                            Book a Ticket
+                        </Link>
                     </Card.Body>
                 </Modal.Body>
-            </Modal>
-        </div>
+            </Modal >
+        </div >
     );
 };
 

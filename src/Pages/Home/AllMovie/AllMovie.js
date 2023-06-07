@@ -3,23 +3,28 @@ import { Button, Card } from 'react-bootstrap';
 import './AllMovie.css';
 
 const AllMovie = ({ movie, setShow, setDetails }) => {
-    const { name, image, language, genres, status, id } = movie.show;
+    const { name, image, language, genres, status } = movie.show;
     return (
-        <Card className='col-lg-3 col-sm-1 mt-3' >
-            <Card.Img className='img-height'
-                variant="top" src={image.original} />
-            <Card.Body>
-                <Card.Title className='fw-bold'>{name}</Card.Title>
+        <div className='col-lg-3 col-md-6 col-sm-1 mt-3'>
+            <Card  >
+                <div className='card-width'>
+                    <Card.Img className='img-height'
+                        variant="top" src={image.original} />
+                    <Card.Body>
+                        <Card.Title className='fw-bold'>{name}</Card.Title>
 
-                <p>Language: <span>{language}</span></p>
-                <p>Genres: <span>{genres[1] ? genres[1] : genres[0]}</span></p>
-                <p>Status: <span>{status}</span></p>
+                        <p><span className='fw-semibold'>Language:</span> <span>{language}</span></p>
+                        <p><span className='fw-semibold'>Genres: </span><span>{genres[1] ? genres[1] : genres[0]}</span></p>
+                        <p><span className='fw-semibold'>Status: </span><span>{status}</span></p>
 
-                <Button variant="primary" onClick={() => { setShow(true); setDetails(movie.show) }}>
-                    Custom Width Modal
-                </Button>
-            </Card.Body>
-        </Card>
+                        <Button className='btn-details' variant="primary" onClick={() => { setShow(true); setDetails(movie.show) }}>
+                            Details
+                        </Button>
+                    </Card.Body>
+                </div>
+
+            </Card >
+        </div >
     );
 };
 
